@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --background: #0a0a0a;
+    --foreground: #ffffff;
+    --primary: #00d4ff;
+    --secondary: #1e3a8a;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: var(--foreground);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: visible;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(33, 212, 253, 0.35);
+  color: white;
+}
+
+.glass {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(22px);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #f8fbff, #21d4fd 42%, #b721ff 78%, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.typewriter {
+  display: inline-block;
+  max-width: max-content;
+  overflow: hidden;
+  border-right: 2px solid rgba(33, 212, 253, 0.9);
+  white-space: nowrap;
+  animation:
+    typing 3.4s steps(34, end) 0.35s both,
+    caret 0.8s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.float-label input:focus + span,
+.float-label input:not(:placeholder-shown) + span,
+.float-label textarea:focus + span,
+.float-label textarea:not(:placeholder-shown) + span {
+  transform: translateY(-1.65rem) scale(0.86);
+  color: #7ddfff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile performance: reduce canvas complexity */
+@media (max-width: 768px) {
+  body > div:first-child canvas {
+    opacity: 0.85;
+  }
+}
+
+/* Additional Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility classes */
+.glassmorphism {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glow-effect {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
