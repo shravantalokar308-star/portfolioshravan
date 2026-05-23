@@ -6,9 +6,29 @@ import { motion } from "framer-motion";
 export function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isDesktopPointer, setIsDesktopPointer] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    const updatePointerMode = () => {
+      setIsDesktopPointer(pointerQuery.matches);
+    };
+
+    updatePointerMode();
+    pointerQuery.addEventListener("change", updatePointerMode);
+
+    return () => {
+      pointerQuery.removeEventListener("change", updatePointerMode);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktopPointer) {
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -37,7 +57,11 @@ export function CustomCursor() {
       document.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("mouseout", handleMouseOut);
     };
-  }, []);
+  }, [isDesktopPointer]);
+
+  if (!isDesktopPointer) {
+    return null;
+  }
 
   return (
     <motion.div
